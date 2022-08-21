@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  gitlab:
+    image: gitlab/gitlab-ce
+    container_name: git
+    hostname: gitlab.example.com
+    extra_hosts:
+    - bitbucket.ulakhaberlesme.com.tr:192.168.10.14
+    ports:
+      - 22:22
+      - 80:80
+      - 443:443
+    volumes:
+      - gitlab_config:/etc/gitlab
+      - gitlab_logs:/var/log/gitlab
+      - gitlab_data:/var/opt/gitlab
+      # - ./volume/etc-gitlab-trusted-certs:/etc/gitlab/trusted-certs
+      # - ./volume/etc-ssl-certs:/etc/ssl/certs
+    restart: unless-stopped
+
+volumes:
+  gitlab_config:
+  gitlab_logs:
+  gitlab_data:
